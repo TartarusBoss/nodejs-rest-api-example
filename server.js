@@ -21,12 +21,28 @@ app.get('/:id', function (req, res) {
   res.end(JSON.stringify(response))
 })
 
+app.get('/:id', (req, res) => {
+  console.log('Peticion GET recibida')
+  res.json({
+    response: 'Método GET en la raiz'
+  })
+})
+
 app.post('/', function (req, res) {
   console.log('POST request received')
   res.writeHead(200, {'Content-Type': 'application/json'})
   var response = { "response" : "This is POST method." }
   console.log(response)
   res.end(JSON.stringify(response))
+})
+
+app.post('/data', (req, res) => {
+  console.log('Peticion POST recibida')
+  const receivedData = req.body;
+  console.log('Data recibida: ', receivedData)
+  res.status(200).json({
+    response: 'Datos recibidos y procesados correctamente' , data: receivedData
+  })
 })
 
 app.put('/', function (req, res) {
